@@ -1,5 +1,5 @@
 {
-  "name": "express-mongoose-api",
+  "name": "bot-a-tron-api",
   "version": "1.0.0",
   "description": "Express + Mongoose API example",
   "main": "index.js",
