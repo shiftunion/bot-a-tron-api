@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded(config.bodyParser));
 app.use(bodyParser.json());
 app.use(compression());
 
-consign(config.consign)
+consign(config.consign) // autoloades script an App onject
   .include('models')
   .then('routes')
   .into(app)

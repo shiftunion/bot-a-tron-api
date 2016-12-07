@@ -16,6 +16,7 @@
     "consign": "0.1.2",
     "express": "4.14.0",
     "mongoose": "4.5.3",
+    "node-trello": "^1.1.2",
     "supertest": "1.2.0"
   },
   "devDependencies": {
