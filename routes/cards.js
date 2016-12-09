@@ -7,11 +7,7 @@ module.exports = app => {
     app.get('/cards', (req, res) => {
 
         getCards().then((data) => res.json(data))
-            .catch((err) => res.status(412).json(err))
-
-        getCards().then((data) => res.json(data))
-            .catch((err) => res.status(412).json(err))
-
+            .catch((err) => res.status(412).json(err));
     });
 
     app.get('/cards_old', (req, res) => {
