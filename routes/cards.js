@@ -1,4 +1,4 @@
-import trelloClient from '../api-client/trelloClient';
+import {getCards} from '../api-client/trelloClient';
 
 module.exports = app => {
 
@@ -6,10 +6,12 @@ module.exports = app => {
 
     app.get('/cards', (req, res) => {
 
-        let x = trelloClient();
-
-        x.then((data) => res.json(data))
+        getCards().then((data) => res.json(data))
             .catch((err) => res.status(412).json(err))
+
+        getCards().then((data) => res.json(data))
+            .catch((err) => res.status(412).json(err))
+
     });
 
     app.get('/cards_old', (req, res) => {
@@ -33,6 +35,7 @@ module.exports = app => {
             return res.status(404).end();
         });
     });
+
 
 
     /*    app.post('/cards', (req, res) => {

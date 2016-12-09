@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/routes/cards.js" />
+        <item url="file://$PROJECT_DIR$/dist/api-client/trelloClient.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/routes/cards.js" />
+      <root url="file://$PROJECT_DIR$/dist/api-client/trelloClient.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

@@ -1,6 +1,8 @@
 import trello from 'node-trello';
 
-export const  getCards = () => {
+
+
+export const getCards = () => {
     var t = new trello("7881ebf3a03c1f99c3da84dac9c298d0", "3ec4373ca2ae3d7286634f1af50011dfdab7bc2d8242df39842bd664be7ded2e");
     /*
 
@@ -21,7 +23,7 @@ export const  getCards = () => {
     let url = '1/boards/' + boardId + '/lists?cards=open&fields=name&card_fields=desc,badges,name,id';
 
 
-    var p1 = new Promise(
+    return new Promise(
         (resolve, reject) => {
             t.get(url, {cards: "open"}, function (err, data) {
                 if (err) reject(err);
@@ -30,8 +32,5 @@ export const  getCards = () => {
             });
         }
     );
-
-    return p1
 };
 
-export default getCards;
