@@ -1,12 +1,14 @@
+/* @flow */
+
 import {getCards} from '../api-client/trelloClient';
 
-module.exports = app => {
+module.exports = (app /*: * */)  => {
 
     const Cards = app.models.cards;
 
     app.get('/cards', (req, res) => {
 
-        getCards().then((data) => res.json(data))
+        getCards() .then((data) => res.json(data))
             .catch((err) => res.status(412).json(err));
     });
 

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development nodemon index.js --exec babel-node",
-    "test": "NODE_ENV=test mocha test/**/*.js"
+    "test": "NODE_ENV=test mocha test/**/*.js",
+    "flow": "test $? -eq 0 -o $? -eq 2"
   },
   "author": "Caio Ribeiro Pereira",
   "license": "MIT",

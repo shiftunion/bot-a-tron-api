@@ -1,9 +1,11 @@
-import trello from 'node-trello';
+import Trello from 'node-trello'
 
-
+/* @flow */
 
 export const getCards = () => {
-    var t = new trello("7881ebf3a03c1f99c3da84dac9c298d0", "3ec4373ca2ae3d7286634f1af50011dfdab7bc2d8242df39842bd664be7ded2e");
+
+    const t = new Trello("7881ebf3a03c1f99c3da84dac9c298d0", "3ec4373ca2ae3d7286634f1af50011dfdab7bc2d8242df39842bd664be7ded2e");
+
     /*
 
      t.get("/1/members/me", function(err, data) {
