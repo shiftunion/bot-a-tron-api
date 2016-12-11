@@ -1,14 +1,16 @@
 import {getCards} from "../api-client/trelloClient";
+import {getAllTrelloCardsAsBotCards} from "../models/dataHelper"
 
-module.exports = (app /*: * */) => {
+module.exports = (app) => {
 
   const Cards = app.models.cards;
 
-  app.get('/cards', (req, res) => {
+  app.get('/bot', (req, res) => {
 
     getCards().then((data) => res.json(data))
       .catch((err) => res.status(412).json(err));
   });
+
 
   app.get('/cards_old', (req, res) => {
     Cards.find({}, (err, cards) => {
@@ -19,8 +21,17 @@ module.exports = (app /*: * */) => {
     });
   });
 
-  app.get('/cards/:taskId', (req, res) => {
-    const {taskId} = req.params;
+  app.get('/bot/:msg', (req, res) => {
+
+    const message = req.params.msg;
+    console.log('m:' + message);
+
+    getAllTrelloCardsAsBotCards().then((data) => res.json(data))
+      .catch((err) => res.status(412).json(err));
+
+
+
+    /*const {taskId} = req.params;
     Cards.findById(taskId, (err, task) => {
       if (err) {
         return res.status(412).json(err);
@@ -29,7 +40,7 @@ module.exports = (app /*: * */) => {
         return res.json(task);
       }
       return res.status(404).end();
-    });
+    });*/
   });
 
 

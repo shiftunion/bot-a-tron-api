@@ -3,6 +3,7 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/dist/routes/cards.js" />
+        <item url="file://$PROJECT_DIR$/dist/models/dataHelper.js" />
         <item url="file://$PROJECT_DIR$/dist/index.js" />
         <item url="file://$PROJECT_DIR$/dist/api-client/trelloClient.js" />
         <item url="file://$PROJECT_DIR$/dist/config/config.development.js" />
@@ -10,6 +11,7 @@
     </properties>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/dist/routes/cards.js" />
+      <root url="file://$PROJECT_DIR$/dist/models/dataHelper.js" />
       <root url="file://$PROJECT_DIR$/dist/index.js" />
       <root url="file://$PROJECT_DIR$/dist/api-client/trelloClient.js" />
       <root url="file://$PROJECT_DIR$/dist/config/config.development.js" />
