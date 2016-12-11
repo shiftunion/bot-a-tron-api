@@ -27,7 +27,9 @@ export const getAttachments = (trelloCardId) => {
     (resolve, reject) => {
       t.get(url, function (err, data) {
         if (err) reject(err);
-        resolve(data, trelloCardId);
+        data['trelloCardId'] = trelloCardId;
+        console.log(data + ' GGG ' + trelloCardId);
+        resolve(data);
       });
     }
   );

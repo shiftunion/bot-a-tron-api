@@ -6,6 +6,7 @@ export function getAllTrelloCardsAsBotCards() {
    * - iterate through each card, check mongo, and if it's changed, then update it.
    * */
 
+  var refinedData = null;
 
   return getCards()
     .then((data) => mapDataFormats(data))
@@ -13,7 +14,6 @@ export function getAllTrelloCardsAsBotCards() {
     .catch((err) => {
       throw('could not achieve the mapping you wanted: ' + err)
     });
-
 
   function mapDataFormats(data) {
 
@@ -33,57 +33,42 @@ export function getAllTrelloCardsAsBotCards() {
       }
     }
 
+    refinedData = result;
     return result;
   }
-}
 
-export function appendAttachments(data) {
+  function appendAttachments(data) {
+    let promises = [];
+    for (let card of data) {
+      promises.push(getAttachments(card.trelloCardId)
+      );
+      //return data;
 
-  let promises = [];
-  for (let card of data) {
-    promises.push(getAttachments(card.trelloCardId))
+    }
+    return Promise.all(promises).then((attachData) => insertIntoData(attachData))
   }
 
-  Promise.all(promises)
-    .then((attachArray, trelloCardId) => {
-      return insertIntoData(attachArray, trelloCardId, data);
-    })
-    .catch((err) => {
-      throw(' these are not the droids you are looking for => ' + err)
-    });
-  return data;
+  function insertIntoData(attachData) {
 
-  /*  getAttachments(card.trelloCardId)
-   .then((data) => {
+    console.log('data for insertIntoData 1: ' + attachData[0]);
+    for (let card of refinedData) {
 
-   return {
-   url: "https://mlab.com/",
-   name: "mylink",
-   mimeType: ""
-   }
-   })
-   .catch((err) => {
-   throw('could not achieve the droids you are looking for: ' + err)
-   });
-   }*/
+      for (let arItem of attachData)
 
-  function insertIntoData(attachArray, trelloCardId, data) {
-
-    console.log('trelloCardId: ' + trelloCardId);
-    console.log('attachArray: ' + attachArray.count);
-    for (let card of data) {
-
-      if (card.trelloCardId === trelloCardId) {
-        card['attachments'] = attachArray;
-        console.log('match !! ');
-      }
+        if (card.trelloCardId === arItem.trelloCardId) {
+          card['attachments'] = arItem;
+          console.log('match !! ');
+        }
       console.log('card: ');
       console.log(card);
     }
-    return data;
+    return refinedData;
   }
-
 }
+
+
+
+
 
 
 
