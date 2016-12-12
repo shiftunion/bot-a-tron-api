@@ -20,9 +20,7 @@ export function getAllTrelloCardsAsBotCards() {
     let result = [];
 
     for (let list of data) {
-
       for (let card of list.cards) {
-
         let newCard = {
           title: card.name,
           description: card.desc,
@@ -42,25 +40,17 @@ export function getAllTrelloCardsAsBotCards() {
     for (let card of data) {
       promises.push(getAttachments(card.trelloCardId)
       );
-      //return data;
-
     }
     return Promise.all(promises).then((attachData) => insertIntoData(attachData))
   }
 
   function insertIntoData(attachData) {
 
-    console.log('data for insertIntoData 1: ' + attachData[0]);
     for (let card of refinedData) {
-
       for (let arItem of attachData)
-
         if (card.trelloCardId === arItem.trelloCardId) {
           card['attachments'] = arItem;
-          console.log('match !! ');
         }
-      console.log('card: ');
-      console.log(card);
     }
     return refinedData;
   }

@@ -12,7 +12,6 @@ export const getCards = () => {
     (resolve, reject) => {
       t.get(url, {cards: "open"}, function (err, data) {
         if (err) reject(err);
-
         resolve(data);
       });
     }
@@ -28,7 +27,6 @@ export const getAttachments = (trelloCardId) => {
       t.get(url, function (err, data) {
         if (err) reject(err);
         data['trelloCardId'] = trelloCardId;
-        console.log(data + ' GGG ' + trelloCardId);
         resolve(data);
       });
     }
