@@ -65,10 +65,11 @@ module.exports = (app) => {
       return query
         .exec()
         .then((doc) => {
-          console.log("card updated: " + doc._id);
+          if (doc) console.log("found card: " + doc._id);
+          else console.log("no card found: " + card.trelloCardId);
           return doc
         })
-        .catch(err => console.log(`error updating mongo card: ${err}`))
+        .catch(err => console.log(`error updating mongo card in FindCardInMongo: ${err}`))
 
     }
   })
