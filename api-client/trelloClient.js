@@ -7,7 +7,6 @@ export const getCards = () => {
   let boardId = '584495469e2a4453b033996d';
   let url = '1/boards/' + boardId + '/lists?cards=open&fields=name&card_fields=desc,badges,name,id';
 
-
   return new Promise(
     (resolve, reject) => {
       t.get(url, {cards: "open"}, function (err, data) {
