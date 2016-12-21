@@ -1,10 +1,10 @@
 import { getCards, getAttachments } from '../api-client/trelloClient';
 
-export function getAllTrelloCardsAsBotCards() {
+export function getAllTrelloCardsAsBotCards(trelloBoardId) {
 
-  var refinedData = null;
+  let refinedData = null;
 
-  return getCards()
+  return getCards(trelloBoardId)
     .then((data) => mapDataFormats(data))
     .then((data) => appendAttachments(data))
     .catch((err) => {

@@ -2,14 +2,13 @@ import Trello from 'node-trello';
 
 const t = new Trello(process.env.TRELLO_API_KEY, process.env.TRELLO_USER_TOKEN);
 
-export const getCards = () => {
+export const getCards = (boardId) => {
 
-  let boardId = '584495469e2a4453b033996d';
   let url = '1/boards/' + boardId + '/lists?cards=open&fields=name&card_fields=desc,badges,name,id';
 
   return new Promise(
     (resolve, reject) => {
-      t.get(url, {cards: "open"}, function (err, data) {
+      t.get(url, { cards: "open" }, function (err, data) {
         if (err) reject(err);
         resolve(data);
       });
@@ -30,6 +29,25 @@ export const getAttachments = (trelloCardId) => {
       });
     }
   );
+};
+
+export const getLastActivityForTrelloBoard = (boardId) => {
+
+  let url = '1/boards/' + boardId + '/dateLastActivity';
+
+  return new Promise(
+    (resolve, reject) => {
+      t.get(url, function (err, data) {
+        if (err) reject(err);
+        resolve(data._value);
+      });
+    }
+  );
+};
+
+export const getLastActivityForTrelloBoardSync = (boardId, myFunc) => {
+  let url = '1/boards/' + boardId + '/dateLastActivity';
+  t.get(url, myFunc)
 };
 
 
