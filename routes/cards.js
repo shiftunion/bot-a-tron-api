@@ -13,7 +13,6 @@ module.exports = (app) => {
       .catch((err) => res.status(412).json(err));
   });
 
-
   app.get('/cards_old', (req, res) => {
     Cards.find({}, (err, cards) => {
       if (err) {
@@ -38,7 +37,8 @@ module.exports = (app) => {
     let latestRemoteTrelloDate = await getLastActivityForTrelloBoard(trelloBoardId);
     let fullRemoteDataRefreshRequired = await getAndUpdateLastUpdatedDate(trelloBoardId, latestRemoteTrelloDate);
 
-    console.log('refresh required -> ' + fullRemoteDataRefreshRequired);;
+    console.log('refresh required -> ' + fullRemoteDataRefreshRequired);
+
 
     if (fullRemoteDataRefreshRequired) {
       getAllTrelloCardsAsBotCards(trelloBoardId)
@@ -46,17 +46,44 @@ module.exports = (app) => {
     }
 
     Cards.find({}, function (err, cards) {
-      var allCards = {};
-
-      cards.forEach(function (card) {
-        allCards[card._id] = card;
-      })
+      // let allCards = {};
+      //
+      // cards.forEach(function (card) {
+      //   allCards[card._id] = card;
+      // });
 
       return res.json(cards);
     })
-
-
   });
+
+  app.get('/cards/random/:requestedCount', async(req, res) => {
+
+    let randomCards = [];
+    let alreadyUsed = [];
+
+    let reqCount = req.params.requestedCount;
+
+    let docCount = await Cards.count().exec();
+
+
+    if (reqCount > docCount) reqCount = docCount;
+
+    for (let step = 0; step < reqCount; step++) {
+      let random = Math.floor(Math.random() * docCount);
+      while (alreadyUsed.includes(random)) { //keep generating a new random number
+        random = Math.floor(Math.random() * docCount);
+      }
+
+      alreadyUsed.push(random);
+
+      await Cards.findOne().skip(random).exec(
+        function (err, result) {
+          randomCards.push(result);
+        });
+    }
+    return res.json(randomCards);
+  });
+
 
   function CheckMongoAndUpdateAllCardsToIt(data) {
 
